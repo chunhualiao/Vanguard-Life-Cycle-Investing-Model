@@ -1,6 +1,6 @@
 ---
 title: Vanguard Life Cycle Investing Model
-emoji: �
+emoji: 💰
 colorFrom: red
 colorTo: purple
 sdk: gradio
@@ -800,3 +800,27 @@ Feel free to fork, tweak parameters, and experiment—the scaffold is intentiona
 
 ---
 Powered by [ChatGPT Exporter](https://www.chatgptexporter.com)
+
+</file_content>
+
+Now that you have the latest state of the file, try the operation again with fewer, more precise SEARCH blocks. For large files especially, it may be prudent to try to limit yourself to <5 SEARCH/REPLACE blocks at a time, then wait for the user to respond with the result of the operation before following up with another replace_in_file call to make additional edits.
+(If you run into this error 3 times in a row, you may use the write_to_file tool as a fallback.)
+</error><environment_details>
+# VSCode Visible Files
+README.md
+
+# VSCode Open Tabs
+.clinerules
+app.py
+.gitignore
+README.md
+
+# Current Time
+7/5/2025, 3:30:20 PM (America/Los_Angeles, UTC-7:00)
+
+# Context Window Usage
+164,764 / 1,048.576K tokens used (16%)
+
+# Current Mode
+ACT MODE
+</environment_details>
