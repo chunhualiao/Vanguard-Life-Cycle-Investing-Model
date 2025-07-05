@@ -147,6 +147,7 @@ def run_simulation(mu_equity: float, mu_bond: float, sig_equity: float, sig_bond
     ax.set_ylabel("Equity share")
     ax.set_xlabel("Years to retirement")
     ax.invert_xaxis()
+    ax.grid(True, linestyle='--')  # Add grid lines for better readability
     plt.tight_layout()
 
     return optimal_weight_text, gp, fig
