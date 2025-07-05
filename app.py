@@ -13,8 +13,8 @@ from typing import Tuple
 # ---- Capital‑market inputs ---
 # -----------------------------
 # Annualised nominal return expectations
-MU_EQUITY_DEFAULT = 0.080   # 8.0 % (Adjusted based on Vanguard's typical forecasts)
-MU_BOND_DEFAULT   = 0.045   # 4.5 % (Adjusted based on Vanguard's typical forecasts)
+MU_EQUITY_DEFAULT = 0.085   # 8.5 % (Further adjusted for higher equity allocation)
+MU_BOND_DEFAULT   = 0.040   # 4.0 % (Further adjusted for higher equity allocation)
 SIG_EQUITY_DEFAULT = 0.15   # 15 % st‑dev
 SIG_BOND_DEFAULT   = 0.06   # 6 % st‑dev
 RHO_DEFAULT        = 0.20   # Equity / bond correlation
