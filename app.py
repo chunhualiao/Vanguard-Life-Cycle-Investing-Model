@@ -215,6 +215,11 @@ This model serves as a didactic tool to understand the principles of life-cycle 
 
 with gr.Blocks() as demo:
     gr.Markdown(introduction_markdown)
+    gr.CSS("""
+    .gr-form-row .gr-info-text {
+        color: #333333 !important; /* Dark gray for better contrast */
+    }
+    """)
     iface = gr.Interface(
         fn=run_simulation,
         inputs=[
