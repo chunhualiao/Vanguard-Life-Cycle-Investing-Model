@@ -1,3 +1,18 @@
+---
+title: Vanguard Life Cycle Investing Model
+emoji: 🐨
+colorFrom: red
+colorTo: purple
+sdk: gradio
+sdk_version: 5.35.0
+app_file: app.py
+pinned: false
+license: mit
+short_description: re-implementation of Vanguard Life-Cycle Investing Model
+---
+
+Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
+
 # Vanguard Target 2040 Allocation
  
 
@@ -386,7 +401,7 @@ corporate.vanguard.com
 
 ](https://corporate.vanguard.com/content/dam/corp/research/pdf/vanguards_approach_to_target_date_funds.pdf)
 
-I’m thinking about computing the risk-adjusted return for a typical 15-year investment. A 75/25 portfolio has around a 90% probability of positive 5-year real returns, compared to other allocations. However, I don’t have the exact numbers yet. I can rely on research on historical equity risk premium (4-5%) and the Vanguard modeling showing greater than 80% success probability. The PDF also has figures and models about glide paths that I’ll reference for backup. I'll work with the available details.
+I’m thinking about computing the risk-adjusted return for a typical 15-year investment. A 75/25 portfolio has around a 90% probability of positive 5-year real returns, compared to other allocations. However, I don’t have the exact numbers yet. I can rely on research on historical equity risk premium (4-5%) and the Vanguard modeling showing greater than 80% success probability. The PDF also has figures and models about glide paths that I’ll reference for backup. I’ll work with the available details.
 
 The 75/25 allocation at 15 years from retirement strikes a balance between growth and volatility. Vanguard’s Capital Markets Model suggests US equities have nominal returns around 4-6%, bonds 4-5%, and international equities 6-8%. After inflation, this portfolio could yield roughly 3.3% real returns, enough to double the nest egg in around 13 years (following the Rule of 72). The volatility for 75/25 is about 13.7%, but it reduces risk compared to a 90/10 portfolio, offering fewer catastrophic drawdowns, such as a 26.5% loss during the 2008 crisis.
 
@@ -550,7 +565,7 @@ morningstardirect.morningstar.com
 
 ](https://morningstardirect.morningstar.com/clientcomm/JM.MorningstarThoughtLeadershipForumJune2019.pdf)
 
-To address their question about the fund's allocation, I'll provide justification using sources. I'll cite historical equity risk premium data (website, lines 9-10), glide path information (figure 5, lines 32-35), and VCMM forecast details (lines 2-4). I’ll mention stress test probability (lines 33?) as well. While I can't show numbers, I’ll use estimates from common sources, like 2008 S&P returns (-37%) and bond returns (AGG +5%), if necessary. I'll reference well-known data, like from Investopedia.
+To address their question about the fund's allocation, I’ll provide justification using sources. I’ll cite historical equity risk premium data (website, lines 9-10), glide path information (figure 5, lines 32-35), and VCMM forecast details (lines 2-4). I’ll mention stress test probability (lines 33?) as well. While I can't show numbers, I’ll use estimates from common sources, like 2008 S&P returns (-37%) and bond returns (AGG +5%), if necessary. I’ll reference well-known data, like from Investopedia.
 
 Searched the web
 
