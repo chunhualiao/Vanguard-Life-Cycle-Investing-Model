@@ -1,0 +1,8 @@
+always run python programs within a virtual environment
+keep required python packages into requirements.txt
+
+make the python program suitable to be deployed on hugging face Space, via Gradio
+
+The goal is to let anyone set the all configurable settings for assumptions, 
+* then run simulations to answer the optimal asset allocation ratio
+* with all justifications
