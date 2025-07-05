@@ -1,6 +1,6 @@
 ---
 title: Vanguard Life Cycle Investing Model
-emoji: 🐨
+emoji: �
 colorFrom: red
 colorTo: purple
 sdk: gradio
