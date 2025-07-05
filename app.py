@@ -214,7 +214,7 @@ This model serves as a didactic tool to understand the principles of life-cycle 
 """
 
 with gr.Blocks(css="""
-    .gr-form-row .gr-info-text {
+    .gr-form-row p {
         color: #333333 !important; /* Dark gray for better contrast */
     }
     """) as demo:
