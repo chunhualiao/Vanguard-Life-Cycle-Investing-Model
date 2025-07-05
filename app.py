@@ -213,13 +213,12 @@ This application provides an **open-box** re-implementation of the core ideas be
 This model serves as a didactic tool to understand the principles of life-cycle investing and optimal asset allocation under uncertainty.
 """
 
-with gr.Blocks() as demo:
-    gr.Markdown(introduction_markdown)
-    gr.CSS("""
+with gr.Blocks(css="""
     .gr-form-row .gr-info-text {
         color: #333333 !important; /* Dark gray for better contrast */
     }
-    """)
+    """) as demo:
+    gr.Markdown(introduction_markdown)
     iface = gr.Interface(
         fn=run_simulation,
         inputs=[
