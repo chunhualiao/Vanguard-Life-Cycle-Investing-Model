@@ -219,7 +219,8 @@ with gr.Blocks(css="""
         color: #333333 !important; /* Dark gray for better contrast */
     }
     """) as demo:
-    gr.Markdown(introduction_markdown)
+    with gr.Accordion("Detailed Introduction", open=False):
+        gr.Markdown(introduction_markdown)
     iface = gr.Interface(
         fn=run_simulation,
         inputs=[
