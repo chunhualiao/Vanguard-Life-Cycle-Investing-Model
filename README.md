@@ -11,6 +11,8 @@ license: mit
 short_description: re-implementation of Vanguard Life-Cycle Investing Model
 ---
 
+This project is deployed at https://huggingface.co/spaces/liaoch/Vanguard-Life-Cycle-Investing-Model
+
 Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
 
 # Vanguard Target 2040 Allocation
@@ -26,207 +28,32 @@ The user is asking if the Vanguard Target Retirement 2040 fund holds roughly 75%
 
 I’ll check Vanguard’s site, Morningstar, and similar sources to confirm the current asset allocation of the Vanguard Target Retirement 2040 fund. I’ll look for search results like “Vanguard Target Retirement 2040 portfolio allocation” and “VTIVX asset allocation July 2025” to get the main figures. Once I gather the details, I’ll use citations to back up my findings. I’ll start by looking for the most up-to-date data.
 
-Searched the web
-
-Vanguard Target Retirement 2040 asset allocation 2025
-
-VTIVX portfolio percent stocks bonds 2025
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://www.ft.com&sz=32)
-
-www.ft.com
-
-](https://www.ft.com/content/f5392196-726d-4ede-8c8d-72a5ad8a2f9b)
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://investor.vanguard.com&sz=32)
-
-investor.vanguard.com
-
-](https://investor.vanguard.com/investment-products/mutual-funds/profile/vforx)
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://advisors.vanguard.com&sz=32)
-
-advisors.vanguard.com
-
-](https://advisors.vanguard.com/investments/products/vforx/vanguard-target-retirement-2040-fund)
-
-![](https://www.google.com/s2/favicons?domain=https://institutional.vanguard.com&sz=32)
-
-![](https://www.google.com/s2/favicons?domain=https://www.morningstar.com&sz=32)
-
-![](https://www.google.com/s2/favicons?domain=https://www.schwab.wallst.com&sz=32)
-
-6 more
 
 I’m checking sources like Vanguard and Morningstar to verify the asset allocation of the Vanguard Target Retirement 2040 Fund. I tried some search queries but didn’t get enough details—only a few lines, not the precise numbers. I need to dig deeper into specific pages, like a fact sheet or portfolio breakdown, to get the exact allocation. Once I find it, I’ll provide the relevant details, including citations. I'll start looking for more detailed information!
 
-Searched the web
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://investor.vanguard.com&sz=32)
-
-investor.vanguard.com
-
-](https://investor.vanguard.com/investment-products/mutual-funds/profile/vforx)
 
 I started searching for Vanguard Target Retirement 2040’s asset allocation, but the search results didn’t provide enough. It only showed one line, maybe due to some restriction. I'll try again with more reliable sources, such as the prospectus PDF or institutional site pages. This should give more detailed data to ensure accuracy—especially when it comes to current asset allocations for the fund, like stocks and bonds. I’ll keep digging!
 
-Searched the web
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://institutional.vanguard.com&sz=32)
-
-institutional.vanguard.com
-
-](https://institutional.vanguard.com/investments/product-details/fund/0696)
-
-I’ve been searching for the Vanguard Target Retirement 2040 fund’s asset allocation, but the results so far aren't detailed enough—they’re limited or blocked. The site
-
-Searched the web
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://www.morningstar.com&sz=32)
-
-www.morningstar.com
-
-](https://www.morningstar.com/funds/xnas/vforx/portfolio)
 
 It seems like websites like Vanguard and Morningstar are giving me trouble, possibly due to restrictions or site design. I'll try seeking alternative sources like Seeking Alpha or general info from Wikipedia, as these may be more accessible. I need to find more detailed and reliable asset allocation numbers for Vanguard’s Target Retirement 2040 fund, so I’ll keep looking until I get the precise data I need. Let’s see if these sources have what I’m looking for.
 
 I'll search for "VFORX asset allocation 75 25" to confirm the current allocation of Vanguard’s Target Retirement 2040 Fund. This search should help me find the approximate percentage of stocks and bonds in the fund, ideally something close to the 75/25 mix the user mentioned. I’ll check through the results to get the most accurate, up-to-date asset allocation and share it with the user. Let's get this sorted!
 
-Searched the web
-
-VFORX 75% stocks 25% bonds May 2025
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://www.ft.com&sz=32)
-
-www.ft.com
-
-](https://www.ft.com/content/f5392196-726d-4ede-8c8d-72a5ad8a2f9b)
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://www.barrons.com&sz=32)
-
-www.barrons.com
-
-](https://www.barrons.com/articles/target-date-fund-retirement-stocks-bonds-d747435d)
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://www.morningstar.com&sz=32)
-
-www.morningstar.com
-
-](https://www.morningstar.com/funds/xnas/vforx/quote)
-
-![](https://www.google.com/s2/favicons?domain=https://investor.vanguard.com&sz=32)
-
-![](https://www.google.com/s2/favicons?domain=https://advisors.vanguard.com&sz=32)
-
-![](https://www.google.com/s2/favicons?domain=https://www.investopedia.com&sz=32)
-
-8 more
 
 I found some sources mentioning a roughly 75% stock and 25% bond allocation for VFORX, like an article on Investopedia, which cites data from June 30, 2024. It might still be close to the current numbers, but I want to verify with more up-to-date info. I’ll check Yahoo Finance for the most accurate, real-time data on the fund’s holdings to ensure accuracy for the user. Let's open that now to see
 
-Searched the web
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://ca.finance.yahoo.com&sz=32)
-
-ca.finance.yahoo.com
-
-](https://ca.finance.yahoo.com/quote/VFORX/)
 
 I found some sources that suggest the Vanguard Target Retirement 2040 Fund has about 75% in stocks and 25% in bonds, such as an Investopedia article dated June 30, 2024. But I'd like to get more specific, up-to-date information directly from Yahoo
 
-Searched the web
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://finance.yahoo.com&sz=32)
-
-finance.yahoo.com
-
-](https://finance.yahoo.com/quote/VFORX/holdings?p=VFORX)
 
 I found some sources that mention the Vanguard Target Retirement Fund (VFORX) holds about 75% in stocks and 25% in bonds. An article on Investopedia, dated June 30, 2024, backs this up, though it's a little dated. I should cross-check this information with Yahoo Finance or SeekAlpha for the most up-to-date data. If access is blocked on some sites, I’ll need to explore other sources for confirmation. Let's get a clearer breakdown.
 
-Searched the web
-
-VFORX holdings breakdown stocks vs bonds as of May 31 2025
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://seekingalpha.com&sz=32)
-
-seekingalpha.com
-
-](https://seekingalpha.com/symbol/IRMCX)
 
 I found several sources mentioning that VFORX holds about 75% in stocks and 25% in bonds. There's an Investopedia article dated June 2024 backing this up, but it might be a little outdated. To get more precise numbers, I’ll try looking on Yahoo Finance, though the environment might block certain sites. If that's the case, I’ll try SeekAlpha or look for other stock breakdowns using "VFORX composition 2025." I’m sure we’ll get the details soon enough!
 
-Searched the web
-
-VFORX composition 2025 stocks bonds
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://www.ft.com&sz=32)
-
-www.ft.com
-
-](https://www.ft.com/content/f5392196-726d-4ede-8c8d-72a5ad8a2f9b)
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://investor.vanguard.com&sz=32)
-
-investor.vanguard.com
-
-](https://investor.vanguard.com/investment-products/mutual-funds/profile/vforx)
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://www.morningstar.com&sz=32)
-
-www.morningstar.com
-
-](https://www.morningstar.com/funds/xnas/vforx/quote)
-
-![](https://www.google.com/s2/favicons?domain=https://fundresearch.fidelity.com&sz=32)
-
-![](https://www.google.com/s2/favicons?domain=https://institutional.vanguard.com&sz=32)
-
-![](https://www.google.com/s2/favicons?domain=https://www.schwab.wallst.com&sz=32)
-
-8 more
 
 I came across some sources suggesting VFORX has around 75% in stocks and 25% in bonds, such as an Investopedia article from June 2024. But I want more current, precise data. I’m considering checking Yahoo Finance for specific holdings. Despite some potential restrictions, its snippet suggests 74.27%
 
-Searched the web
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://finance.yahoo.com&sz=32)
-
-finance.yahoo.com
-
-](https://finance.yahoo.com/quote/VFORX/holdings/)
 
 Some sources, like Investopedia, list VFORX as holding around 75% in stocks and 25% in bonds. This might still be similar today, but I want to get more accurate, up-to-date details. I've found a snippet from Yahoo Finance listing the breakdown as 74.27% stocks, 24.05% bonds, and 1.6% cash. While it may not be recent (not sure about the exact date), it still seems relevant. Let's delve into this data further!
 
@@ -313,65 +140,16 @@ Assuming expected returns of 6.5% for stocks and 4.0% for bonds, a 75/25 stock-b
 
 Searched the web
 
-Vanguard glide path 75% equity 15 years before target date research PDF
-
-Vanguard capital market assumptions 2025 expected returns
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://corporate.vanguard.com&sz=32)
-
-corporate.vanguard.com
-
-](https://corporate.vanguard.com/content/dam/corp/research/pdf/vanguards_approach_to_target_date_funds.pdf)
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://institutional.vanguard.com&sz=32)
-
-institutional.vanguard.com
-
-](https://institutional.vanguard.com/content/dam/inst/iig-transformation/insights/pdf/2022/Vanguards-approach-to-target-date-funds.pdf)
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://advisors.vanguard.com&sz=32)
-
-advisors.vanguard.com
-
-](https://advisors.vanguard.com/insights/article/series/market-perspectives)
-
-![](https://www.google.com/s2/favicons?domain=https://studydaddy.com&sz=32)
-
-![](https://www.google.com/s2/favicons?domain=https://www.marketwatch.com&sz=32)
-
-![](https://www.google.com/s2/favicons?domain=https://www.investopedia.com&sz=32)
-
-3 more
 
 Assuming stock returns of 6.5% and bond returns of 4.0%, a 75/25 portfolio generates a return of 5.875%. The 75/25 allocation has almost the same return as a 90/10 portfolio but with 2.9% less volatility (16.3 vs 13.7). In
 
 Searched the web
 
-[
-
-![](https://www.google.com/s2/favicons?domain=https://advisors.vanguard.com&sz=32)
-
-advisors.vanguard.com
-
-](https://advisors.vanguard.com/insights/article/series/market-perspectives)
 
 Assuming stock returns of 6.5% and bond returns of 4%, a 75/25 portfolio gives 5.875% return, which is only 0.4% less than a 90/10 portfolio, but with 2.9% lower volatility (13.7% vs 16.3%). It seems like a better balance between risk and reward. Historically, a 75/25 portfolio lost 35% in 2008 vs 45% for 90/10. I’ll review Vanguard’s research on glide paths and look for specific expected returns data to confirm this approach.
 
 Searched the web
 
-[
-
-![](https://www.google.com/s2/favicons?domain=https://corporate.vanguard.com&sz=32)
-
-corporate.vanguard.com
-
-](https://corporate.vanguard.com/content/dam/corp/research/pdf/vanguards_approach_to_target_date_funds.pdf)
 
 I can reference Vanguard's approach for target date funds, focusing on assumptions about equity risk premium and drawdown tolerance. I’ll try to find specific information in the Vanguard PDF, like the metrics for the 75/25 portfolio after 15 years (perhaps in Figure 5 or a similar graph). It'll help support the case for 75/25 as a balanced option, showcasing the probability of success and additional numbers to justify this allocation. I could also summarize relevant metrics from external sources if needed.
 
@@ -379,69 +157,13 @@ I want to compute the risk-adjusted return for different portfolio splits, such 
 
 Searched the web
 
-Vanguard 75/25 allocation 15 years before retirement probability of success
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://investor.vanguard.com&sz=32)
-
-investor.vanguard.com
-
-](https://investor.vanguard.com/investor-resources-education/education/model-portfolio-allocation)
-
 I’m thinking of computing risk-adjusted returns for a typical investor with a 15-year horizon. I’ve seen that a 75/25 portfolio has about a 90% chance of positive 5-year real returns, but I don’t have the exact numbers now. I can rely on the earlier PDF for justification and the equity risk premium of around 4-5% per year. I'll also remember that Vanguard’s modeling of a 40-year glide path shows the highest probability of success. I’ll search for certainty fee equivalents for further support.
-
-Searched the web
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://corporate.vanguard.com&sz=32)
-
-corporate.vanguard.com
-
-](https://corporate.vanguard.com/content/dam/corp/research/pdf/vanguards_approach_to_target_date_funds.pdf)
 
 I’m thinking about computing the risk-adjusted return for a typical 15-year investment. A 75/25 portfolio has around a 90% probability of positive 5-year real returns, compared to other allocations. However, I don’t have the exact numbers yet. I can rely on research on historical equity risk premium (4-5%) and the Vanguard modeling showing greater than 80% success probability. The PDF also has figures and models about glide paths that I’ll reference for backup. I’ll work with the available details.
 
 The 75/25 allocation at 15 years from retirement strikes a balance between growth and volatility. Vanguard’s Capital Markets Model suggests US equities have nominal returns around 4-6%, bonds 4-5%, and international equities 6-8%. After inflation, this portfolio could yield roughly 3.3% real returns, enough to double the nest egg in around 13 years (following the Rule of 72). The volatility for 75/25 is about 13.7%, but it reduces risk compared to a 90/10 portfolio, offering fewer catastrophic drawdowns, such as a 26.5% loss during the 2008 crisis.
 
 Searched the web
-
-S&P 500 total return 2008 -37%
-
-Bloomberg Barclays U.S. Aggregate Bond Index return 2008
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://www.spglobal.com&sz=32)
-
-www.spglobal.com
-
-](https://www.spglobal.com/market-intelligence/en/news-insights/articles/2023/1/s-p-500-logs-its-worst-annual-performance-since-2008-73687583)
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://www.bloomberg.com&sz=32)
-
-www.bloomberg.com
-
-](https://www.bloomberg.com/quote/LBUSTRUU%3AIND)
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://www.morningstar.com&sz=32)
-
-www.morningstar.com
-
-](https://www.morningstar.com/funds/alternatives-aggregate)
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://www.investopedia.com&sz=32)
-
-www.investopedia.com
-
-](https://www.investopedia.com/ask/answers/042415/what-average-annual-return-sp-500.asp)
 
 At 15 years from retirement, Vanguard’s glide path recommends a 75% equity allocation to balance growth and volatility. Using their Capital Markets Model, US equities are expected to have a 4-6% nominal return, bonds at 4-5%, and international equities at 6-8%, giving a weighted return of about 5.8% nominal, which translates to around 3.3% real returns after inflation. A 75/25 portfolio could grow the nest egg in 12-13 years. In the 2008 crisis, a 75/25 portfolio lost 26.5%, while a 90/10 portfolio lost 44%.
 
@@ -467,25 +189,11 @@ Vanguard chooses a 75% equities allocation for investors 15 years from retiremen
 
 Searched the web
 
-[
-
-![](https://www.google.com/s2/favicons?domain=https://advisors.vanguard.com&sz=32)
-
-advisors.vanguard.com
-
-](https://advisors.vanguard.com/insights/article/series/market-perspectives)
 
 Vanguard chooses a 75% equities allocation for investors 15 years from retirement, balancing expected growth and reduced risk. Based on Vanguard’s research, the 75/25 portfolio grows 2.35 times over 15 years, while a 90/10 portfolio grows 2.48 times (about 6% more), and 60/40 grows 2.23 times (about 5% less). The slight risk tradeoff (3% higher with 90/10 versus 75/25) and similar growth justifies this allocation. Sharpe ratios for different portfolios further highlight the tradeoff in risk vs return, with 75/25 offering a favorable balance.
 
 Searched the web
 
-[
-
-![](https://www.google.com/s2/favicons?domain=https://advisors.vanguard.com&sz=32)
-
-advisors.vanguard.com
-
-](https://advisors.vanguard.com/insights/article/series/market-perspectives)
 
 I’ll describe the trade-offs between different portfolio allocations:
 
@@ -501,13 +209,6 @@ I'll emphasize the importance of balancing risk and return. Additionally, we’l
 
 Searched the web
 
-[
-
-![](https://www.google.com/s2/favicons?domain=https://corporate.vanguard.com&sz=32)
-
-corporate.vanguard.com
-
-](https://corporate.vanguard.com/content/corporatesite/us/en/corp/vemo/vemo-return-forecasts.html)
 
 I need to make sure I mention Vanguard's use of human capital theory (referencing the PDF specific lines).
 
@@ -519,143 +220,28 @@ The user asks why this fund uses a specific allocation and wants numbers to just
 
 Searched the web
 
-[
-
-![](https://www.google.com/s2/favicons?domain=https://www.bloomberg.com&sz=32)
-
-www.bloomberg.com
-
-](https://www.bloomberg.com/news/articles/2009-10-05/typical-u-dot-s-dot-worker-saw-401-k-lose-24-dot-3-percent-in-2008)
-
 To answer the question about the fund's allocation, I'll explain using historical data and source quotes. The equity risk premium for historical returns can be referenced from a specific website (lines 9-10). I'll also use glide path data (figure 5, lines 32-35) and VCMM forecast for the return difference (lines 2-4). For stress testing, probabilities are mentioned in the document (lines 33?). I'll mention the 2008 bond and stock returns, with references from the same data source for clarity.
 
 Searched the web
 
-Bloomberg Barclays U.S. Aggregate Bond Index 2008 total return 5.2%
 
-[
-
-![](https://www.google.com/s2/favicons?domain=https://www.bloomberg.com&sz=32)
-
-www.bloomberg.com
-
-](https://www.bloomberg.com/quote/LBUSTRUU%3AIND)
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://www.morningstar.com&sz=32)
-
-www.morningstar.com
-
-](https://www.morningstar.com/funds/more-inclusive-us-aggregate-bond-index)
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://www.fidelity.com&sz=32)
-
-www.fidelity.com
-
-](https://www.fidelity.com/bin-public/060_www_fidelity_com/documents/mutual-funds/Fidelity%20Total%20Bond%20Morningstar%20Analyst%20Report.pdf)
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://morningstardirect.morningstar.com&sz=32)
-
-morningstardirect.morningstar.com
-
-](https://morningstardirect.morningstar.com/clientcomm/JM.MorningstarThoughtLeadershipForumJune2019.pdf)
 
 To address their question about the fund's allocation, I’ll provide justification using sources. I’ll cite historical equity risk premium data (website, lines 9-10), glide path information (figure 5, lines 32-35), and VCMM forecast details (lines 2-4). I’ll mention stress test probability (lines 33?) as well. While I can't show numbers, I’ll use estimates from common sources, like 2008 S&P returns (-37%) and bond returns (AGG +5%), if necessary. I’ll reference well-known data, like from Investopedia.
 
 Searched the web
 
-S&P 500 return 2008 -37% AGG bond index return 2008 5%
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://www.investopedia.com&sz=32)
-
-www.investopedia.com
-
-](https://www.investopedia.com/terms/l/lehmanaggregatebondindex.asp)
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://www.morningstar.com&sz=32)
-
-www.morningstar.com
-
-](https://www.morningstar.com/funds/only-highest-quality-junk-bonds)
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://gladmainnew.morningstar.com&sz=32)
-
-gladmainnew.morningstar.com
-
-](https://gladmainnew.morningstar.com/clientcomm/AltInvObserver_Q209_AbsoluteReturns.pdf)
 
 They’ve asked why a specific fund uses this allocation, and to justify it using numbers. I’ll answer in English and make sure to cite the sources. I'll pull from historical data on equity risk premiums, glide paths, and VCMM forecasts. I'll refer to sources like the publicly available data on 2008 S&P and bond index returns. Though I can’t show precise numbers myself, I’ll reference well-known figures, like the 2008 AGG bond return of +5% from Investopedia, which I should cite properly.
 
 Searched the web
 
-[
-
-![](https://www.google.com/s2/favicons?domain=https://www.morningstar.com&sz=32)
-
-www.morningstar.com
-
-](https://www.morningstar.com/funds/high-yield-bond-etf-liquidity-focus)
 
 The user is asking why a specific fund uses this allocation and wants to see the supporting numbers. I’ll explain in English and be sure to cite the sources I used. I’ll reference historical equity risk premiums, glide path figures, and VCMM forecast data, all from available sources. I also found 2008 S&P and bond returns, including bond index AGG’s +5% return for that year from Investopedia, which I can cite directly.
 
 Searched the web
 
-"2008" "Bloomberg U.S. Aggregate Bond Index" "5.2%"
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://www.morningstar.com&sz=32)
-
-www.morningstar.com
-
-](https://www.morningstar.com/funds/xnas/fajex/quote)
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://www.investopedia.com&sz=32)
-
-www.investopedia.com
-
-](https://www.investopedia.com/terms/l/lehmanaggregatebondindex.asp)
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://en.wikipedia.org&sz=32)
-
-en.wikipedia.org
-
-](https://en.wikipedia.org/wiki/Subprime_mortgage_crisis)
-
 Searched the web
 
-S&P 500 2008 return -38%
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://en.wikipedia.org&sz=32)
-
-en.wikipedia.org
-
-](https://en.wikipedia.org/wiki/List_of_largest_daily_changes_in_the_S%26P_500_Index)
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://www.investopedia.com&sz=32)
-
-www.investopedia.com
-
-](https://www.investopedia.com/ask/answers/042415/what-average-annual-return-sp-500.asp)
 
 I'm looking for the 2008 return figures for the U.S. Aggregate Bond Index and the S&P 500. I tried to open a specific website, but it’s not accessible right now. I’ll check widely known sources, starting with Bloomberg’s 2008 Bond Index return of 5.24%. The Wikipedia page confirms the S&P 500’s 2008 return was -36.72%. I’ll use these numbers as a reference, even though I can't access the exact details I initially wanted.
 
@@ -666,24 +252,6 @@ Searched the web
 I’m having trouble accessing the data directly from the website, but I can rely on other sources. I’ll search for the return of the U.S. Aggregate Bond Index in 2008, which is commonly cited as 5.24%. For the S&P 500, Wikipedia shows a total return of -36.72% for 2008. So, I’ll use that as a reference. It's not the perfect citation, but it should work for now.
 
 Searched the web
-
-"Bloomberg U.S. Aggregate Bond Index" 2008 return
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://en.wikipedia.org&sz=32)
-
-en.wikipedia.org
-
-](https://en.wikipedia.org/wiki/Bloomberg_US_Aggregate_Bond_Index)
-
-[
-
-![](https://www.google.com/s2/favicons?domain=https://www.investopedia.com&sz=32)
-
-www.investopedia.com
-
-](https://www.investopedia.com/terms/l/lehmanaggregatebondindex.asp)
 
 I can’t access some sources directly, but I’ll rely on widely known information. For example, the 2008 return for the Bloomberg U.S. Aggregate Bond Index is commonly cited as +5.24%, and the S&P 500 had a return of around -36.72%. While I won’t use the exact numbers from these sources, I can include them as approximate values with a disclaimer. The goal is to provide useful information, so I might not dig into precise historical data.
 
@@ -795,32 +363,3 @@ Edit the assumptions at the _top_ of the file (lines 30-55) and widen the grid (
 5.  **Multi-asset buckets** – replace the 2-asset mix with four VG building blocks (US/Intl equity, US/Intl bonds).
 
 Feel free to fork, tweak parameters, and experiment—the scaffold is intentionally lightweight so you can inspect every assumption that drives the glide-path decision.
-
-
-
----
-Powered by [ChatGPT Exporter](https://www.chatgptexporter.com)
-
-</file_content>
-
-Now that you have the latest state of the file, try the operation again with fewer, more precise SEARCH blocks. For large files especially, it may be prudent to try to limit yourself to <5 SEARCH/REPLACE blocks at a time, then wait for the user to respond with the result of the operation before following up with another replace_in_file call to make additional edits.
-(If you run into this error 3 times in a row, you may use the write_to_file tool as a fallback.)
-</error><environment_details>
-# VSCode Visible Files
-README.md
-
-# VSCode Open Tabs
-.clinerules
-app.py
-.gitignore
-README.md
-
-# Current Time
-7/5/2025, 3:30:20 PM (America/Los_Angeles, UTC-7:00)
-
-# Context Window Usage
-164,764 / 1,048.576K tokens used (16%)
-
-# Current Mode
-ACT MODE
-</environment_details>
