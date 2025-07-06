@@ -40,7 +40,8 @@ def simulate_wealth_paths(w_e: float,
                           rho: float,
                           n_paths: int, seed: int,
                           salary_0: float, salary_growth: float,
-                          contrib_rate: float
+                          contrib_rate: float,
+                          current_wealth: float
                           ) -> np.ndarray:
     """Simulate wealth accumulation over *years* under constant
     equity weight *w_e*. Contributions are made at START of each year."""
@@ -66,7 +67,7 @@ def simulate_wealth_paths(w_e: float,
     contribs = contrib_rate * salary              # fixed % contributions
 
     # simulate wealth paths
-    W = np.zeros((n_paths,))
+    W = np.full((n_paths,), current_wealth, dtype=float)
     for yr in range(years):
         W += contribs[yr]           # contribution at beginning of year
         W *= (1 + port_r[:, yr])    # grow for the year
@@ -92,6 +93,7 @@ def find_optimal_equity_weight(years: int,
                                n_paths: int, seed: int,
                                salary_0: float, salary_growth: float,
                                contrib_rate: float,
+                               current_wealth: float,
                                grid: np.ndarray | None = None) -> Tuple[float, float]:
     """Exhaustive search over equity weights to maximise expected utility."""
     if grid is None:
@@ -99,7 +101,7 @@ def find_optimal_equity_weight(years: int,
     best_w, best_u = None, -np.inf
     for w in grid:
         W = simulate_wealth_paths(w, years, mu_equity, mu_bond, sig_equity, sig_bond, rho,
-                                  n_paths, seed, salary_0, salary_growth, contrib_rate)
+                                  n_paths, seed, salary_0, salary_growth, contrib_rate, current_wealth)
         u = expected_utility_terminal_wealth(W, gamma)
         if u > best_u:
             best_u, best_w = u, w
@@ -113,20 +115,21 @@ def build_glidepath(max_years: int,
                     gamma: float,
                     n_paths: int, seed: int,
                     salary_0: float, salary_growth: float,
-                    contrib_rate: float) -> pd.DataFrame:
+                    contrib_rate: float,
+                    current_wealth: float) -> pd.DataFrame:
     """Produce Vanguard‑style decreasing equity share from
     *max_years* → 0 to retirement."""
     results = []
     for yrs in range(max_years, -1, -1):
         w_opt, _ = find_optimal_equity_weight(yrs, mu_equity, mu_bond, sig_equity, sig_bond, rho,
-                                              gamma, n_paths, seed, salary_0, salary_growth, contrib_rate)
+                                              gamma, n_paths, seed, salary_0, salary_growth, contrib_rate, current_wealth, grid=None)
         results.append({'years_to_retire': yrs, 'equity_weight': w_opt})
     return pd.DataFrame(results).set_index('years_to_retire')
 
 
 def run_simulation(mu_equity: float, mu_bond: float, sig_equity: float, sig_bond: float, rho: float,
                    gamma: float, salary_0: float, salary_growth: float, contrib_rate: float,
-                   retire_age: int, current_age: int, n_paths: int, seed: int):
+                   retire_age: int, current_age: int, n_paths: int, seed: int, current_wealth: float):
 
     years_to_retirement = retire_age - current_age
     if years_to_retirement <= 0:
@@ -134,12 +137,12 @@ def run_simulation(mu_equity: float, mu_bond: float, sig_equity: float, sig_bond
 
     # Calculate optimal equity weight for current years to retirement
     w_star, _ = find_optimal_equity_weight(years_to_retirement, mu_equity, mu_bond, sig_equity, sig_bond, rho,
-                                           gamma, n_paths, seed, salary_0, salary_growth, contrib_rate)
+                                           gamma, n_paths, seed, salary_0, salary_growth, contrib_rate, current_wealth)
     optimal_weight_text = f"Optimal equity weight with {years_to_retirement} years to retirement → {w_star:.2%}"
 
     # Build the full glide path
     gp = build_glidepath(years_to_retirement, mu_equity, mu_bond, sig_equity, sig_bond, rho,
-                         gamma, n_paths, seed, salary_0, salary_growth, contrib_rate)
+                         gamma, n_paths, seed, salary_0, salary_growth, contrib_rate, current_wealth)
 
     # Plot the glide path
     fig, ax = plt.subplots(figsize=(10, 6))
@@ -162,7 +165,7 @@ def run_simulation(mu_equity: float, mu_bond: float, sig_equity: float, sig_bond
     
     for i in range(n_example_paths):
         W_path = simulate_wealth_paths(w_star, years_to_retirement, mu_equity, mu_bond, sig_equity, sig_bond, rho,
-                                      n_paths, seed + i, salary_0, salary_growth, contrib_rate)
+                                      n_paths, seed + i, salary_0, salary_growth, contrib_rate, current_wealth)
         W_paths.append(W_path)
 
     # Create a plot of the example wealth paths
@@ -196,28 +199,48 @@ def run_simulation(mu_equity: float, mu_bond: float, sig_equity: float, sig_bond
     t = np.arange(years_to_retirement)
     salary = salary_0 * (1 + salary_growth) ** t
     contribs = contrib_rate * salary
-    W = 0
+    W = current_wealth # Initialize W here
+    return_list = []
     for yr in range(years_to_retirement):
+        r = rng.multivariate_normal(mean=means, cov=COV)
+        equity_return = r[0]
+        bond_return = r[1]
+
+        # Clip the returns to a reasonable range
+        equity_return = np.clip(equity_return, -0.5, 0.5)
+        bond_return = np.clip(bond_return, -0.2, 0.2)
+
+        return_list.append(equity_return)
         W += contribs[yr]
-        W *= (1 + (w_star * np.random.normal(mu_equity, sig_equity) + (1 - w_star) * np.random.normal(mu_bond, sig_bond)))
+        W *= (1 + (w_star * equity_return + (1 - w_star) * bond_return))
         utility = expected_utility_terminal_wealth(np.array([W]), gamma)
         data.append({
             'Year': yr + 1,
-            'Salary': salary[yr],
-            'Contribution': contribs[yr],
-            'Wealth': W,
+            'Salary': "${:,.2f}".format(salary[yr]),
+            'Contribution': "${:,.2f}".format(contribs[yr]),
+            'Wealth': "${:,.2f}".format(W),
+            'Equity Return': "{:.2%}".format(equity_return),
+            'Bond Return': "{:.2%}".format(bond_return),
             'Equity Weight': w_star,
             'Expected Utility': utility
         })
     example_path_df = pd.DataFrame(data)
-    
+
     # Highlight the optimal utility
     max_utility = example_path_df['Expected Utility'].max()
     max_utility_index = example_path_df['Expected Utility'].idxmax()
     example_path_df.loc[max_utility_index, 'Optimal'] = True
     example_path_df['Optimal'] = example_path_df['Optimal'].fillna(False)
 
-    return optimal_weight_text, gp, fig, example_path_df, "The following plot shows a few example Monte Carlo simulation paths. The red line highlights the path with the highest expected utility.", fig_paths
+    # Plot the distribution of returns
+    fig_returns, ax_returns = plt.subplots(figsize=(10, 6))
+    ax_returns.hist(return_list, bins=50)
+    ax_returns.set_xlabel("Equity Return")
+    ax_returns.set_ylabel("Frequency")
+    ax_returns.set_title("Distribution of Equity Returns")
+    plt.tight_layout()
+    
+    return optimal_weight_text, gp, fig, example_path_df, "The following plot shows a few example Monte Carlo simulation paths. The red line highlights the path with the highest expected utility.", fig_paths, fig_returns
 
 # Gradio Interface
 iface = gr.Interface(
@@ -243,7 +266,8 @@ iface = gr.Interface(
             gr.Plot(label="Derived Glide Path Plot"),
             gr.DataFrame(label="Example Wealth Path"),
             gr.Markdown("The following plot shows a few example Monte Carlo simulation paths. The red line highlights the path with the highest expected utility."),
-            gr.Plot(label="Example Monte Carlo Simulation Paths")
+            gr.Plot(label="Example Monte Carlo Simulation Paths"),
+            gr.Plot(label="Distribution of Equity Returns")
         ],
         title="Vanguard Life-Cycle Investing Model (Didactic Re-implementation)",
         
@@ -286,7 +310,7 @@ This application provides an **open-box** re-implementation of the core ideas be
 *   **Monte Carlo Simulation:** It uses Monte Carlo methods to generate a large number of possible future return scenarios, capturing the randomness and correlation of asset returns.
 
 *   **Constant Relative Risk Aversion (CRRA) Utility:** Investor preferences are modeled using a CRRA utility function. This function implies that investors are risk-averse and that their risk aversion decreases as their wealth increases (or remains constant, depending on the specific form). The `gamma` parameter controls the degree of risk aversion.
-*   **Wealth Accumulation:** Wealth paths are simulated year by year, with contributions made at the beginning of each year and then growing with portfolio returns.
+*   **Wealth Accumulation:** Wealth paths are simulated year by year, starting with the current investment asset value, with contributions made at the beginning of each year and then growing with portfolio returns.
 *   **Exhaustive Search:** For each year-to-retirement, the model iterates through a predefined grid of equity weights to find the one yielding the highest expected utility.
 
 **Limitations and Caveats:**
@@ -326,7 +350,8 @@ with gr.Blocks(css="""
             gr.Slider(minimum=50, maximum=75, value=RETIRE_AGE_DEFAULT, step=1, label="Retirement Age", info="The age at which the investor plans to retire."),
             gr.Slider(minimum=20, maximum=60, value=CURRENT_AGE_DEFAULT, step=1, label="Current Age", info="The investor's current age. Used to calculate years to retirement."),
             gr.Slider(minimum=1000, maximum=20000, value=N_PATHS_DEFAULT, step=1000, label="Number of Monte-Carlo Paths", info="The number of simulation runs to perform for statistical accuracy."),
-            gr.Number(value=SEED_DEFAULT, label="Random Seed", info="A seed for the random number generator to ensure reproducible results.")
+            gr.Number(value=SEED_DEFAULT, label="Random Seed", info="A seed for the random number generator to ensure reproducible results."),
+            gr.Number(value=0, label="Current Investment Asset Value", info="The current value of the investor's assets.")
         ],
         outputs=[
             gr.Textbox(label="Optimal Equity Weight for Current Years to Retirement"),
