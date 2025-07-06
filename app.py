@@ -150,7 +150,74 @@ def run_simulation(mu_equity: float, mu_bond: float, sig_equity: float, sig_bond
     ax.grid(True, linestyle='--')  # Add grid lines for better readability
     plt.tight_layout()
 
-    return optimal_weight_text, gp, fig
+    # Simulate multiple wealth paths using the optimal equity weight
+    n_example_paths = 10  # Number of example paths to plot
+    W_paths = []
+    rng = np.random.default_rng(seed)
+    COV = np.array([
+        [sig_equity**2, rho*sig_equity*sig_bond],
+        [rho*sig_equity*sig_bond, sig_bond**2]
+    ])
+    means = np.array([mu_equity, mu_bond])
+    
+    for i in range(n_example_paths):
+        W_path = simulate_wealth_paths(w_star, years_to_retirement, mu_equity, mu_bond, sig_equity, sig_bond, rho,
+                                      n_paths, seed + i, salary_0, salary_growth, contrib_rate)
+        W_paths.append(W_path)
+
+    # Create a plot of the example wealth paths
+    fig_paths, ax_paths = plt.subplots(figsize=(10, 6))
+    
+    utilities = []
+    for W_path in W_paths:
+        utility = expected_utility_terminal_wealth(W_path, gamma)
+        utilities.append(utility)
+
+    max_utility_index = np.argmax(utilities)
+    
+    for i, W_path in enumerate(W_paths):
+        if i == max_utility_index:
+            ax_paths.plot(W_path, color='red', linewidth=2, label='Optimal Path')
+        else:
+            ax_paths.plot(W_path, alpha=0.3)
+    ax_paths.set_xlabel("Monte Carlo Paths")
+    ax_paths.set_ylabel("Wealth")
+    ax_paths.legend()
+    ax_paths.set_title("Example Monte Carlo Simulation Paths")
+    ax_paths.grid(True, linestyle='--')
+    plt.tight_layout()
+
+    # Simulate a wealth path using the optimal equity weight
+    #W_path = simulate_wealth_paths(w_star, years_to_retirement, mu_equity, mu_bond, sig_equity, sig_bond, rho,
+    #                              n_paths, seed, salary_0, salary_growth, contrib_rate)
+
+    # Create a DataFrame to store the year-by-year data
+    data = []
+    t = np.arange(years_to_retirement)
+    salary = salary_0 * (1 + salary_growth) ** t
+    contribs = contrib_rate * salary
+    W = 0
+    for yr in range(years_to_retirement):
+        W += contribs[yr]
+        W *= (1 + (w_star * np.random.normal(mu_equity, sig_equity) + (1 - w_star) * np.random.normal(mu_bond, sig_bond)))
+        utility = expected_utility_terminal_wealth(np.array([W]), gamma)
+        data.append({
+            'Year': yr + 1,
+            'Salary': salary[yr],
+            'Contribution': contribs[yr],
+            'Wealth': W,
+            'Equity Weight': w_star,
+            'Expected Utility': utility
+        })
+    example_path_df = pd.DataFrame(data)
+    
+    # Highlight the optimal utility
+    max_utility = example_path_df['Expected Utility'].max()
+    max_utility_index = example_path_df['Expected Utility'].idxmax()
+    example_path_df.loc[max_utility_index, 'Optimal'] = True
+    example_path_df['Optimal'] = example_path_df['Optimal'].fillna(False)
+
+    return optimal_weight_text, gp, fig, example_path_df, "The following plot shows a few example Monte Carlo simulation paths. The red line highlights the path with the highest expected utility.", fig_paths
 
 # Gradio Interface
 iface = gr.Interface(
@@ -170,12 +237,16 @@ iface = gr.Interface(
         gr.Slider(minimum=1000, maximum=20000, value=N_PATHS_DEFAULT, step=1000, label="Number of Monte-Carlo Paths", info="The number of simulation runs to perform for statistical accuracy."),
         gr.Number(value=SEED_DEFAULT, label="Random Seed", info="A seed for the random number generator to ensure reproducible results.")
     ],
-    outputs=[
-        gr.Textbox(label="Optimal Equity Weight for Current Years to Retirement"),
-        gr.DataFrame(label="Derived Glide Path"),
-        gr.Plot(label="Derived Glide Path Plot")
-    ],
-    title="Vanguard Life-Cycle Investing Model (Didactic Re-implementation)",
+        outputs=[
+            gr.Textbox(label="Optimal Equity Weight for Current Years to Retirement"),
+            gr.DataFrame(label="Derived Glide Path"),
+            gr.Plot(label="Derived Glide Path Plot"),
+            gr.DataFrame(label="Example Wealth Path"),
+            gr.Markdown("The following plot shows a few example Monte Carlo simulation paths. The red line highlights the path with the highest expected utility."),
+            gr.Plot(label="Example Monte Carlo Simulation Paths")
+        ],
+        title="Vanguard Life-Cycle Investing Model (Didactic Re-implementation)",
+        
     description="Adjust the parameters to simulate wealth accumulation and find optimal asset allocations."
 )
 
@@ -195,6 +266,7 @@ This application provides an **open-box** re-implementation of the core ideas be
 **Key Assumptions and Internal Algorithms:**
 *   **Capital Market Assumptions:** The model relies on user-defined expected returns, volatilities, and correlation for equities and bonds. These are crucial inputs that drive the simulation.
 *   **Monte Carlo Simulation:** It uses Monte Carlo methods to generate a large number of possible future return scenarios, capturing the randomness and correlation of asset returns.
+
 *   **Constant Relative Risk Aversion (CRRA) Utility:** Investor preferences are modeled using a CRRA utility function. This function implies that investors are risk-averse and that their risk aversion decreases as their wealth increases (or remains constant, depending on the specific form). The `gamma` parameter controls the degree of risk aversion.
 *   **Wealth Accumulation:** Wealth paths are simulated year by year, with contributions made at the beginning of each year and then growing with portfolio returns.
 *   **Exhaustive Search:** For each year-to-retirement, the model iterates through a predefined grid of equity weights to find the one yielding the highest expected utility.
@@ -219,7 +291,7 @@ with gr.Blocks(css="""
         color: #333333 !important; /* Dark gray for better contrast */
     }
     """) as demo:
-    with gr.Accordion("Detailed Introduction", open=False):
+    with gr.Accordion("Detailed Introduction: Click to expand or collapse ", open=False):
         gr.Markdown(introduction_markdown)
     iface = gr.Interface(
         fn=run_simulation,
@@ -241,7 +313,10 @@ with gr.Blocks(css="""
         outputs=[
             gr.Textbox(label="Optimal Equity Weight for Current Years to Retirement"),
             gr.DataFrame(label="Derived Glide Path"),
-            gr.Plot(label="Derived Glide Path Plot")
+            gr.Plot(label="Derived Glide Path Plot"),
+            gr.DataFrame(label="Example Wealth Path"),
+            gr.Markdown("The following plot shows a few example Monte Carlo simulation paths. The red line highlights the path with the highest expected utility."),
+            gr.Plot(label="Example Monte Carlo Simulation Paths")
         ],
         title="Vanguard Life-Cycle Investing Model (Didactic Re-implementation)",
         description="Adjust the parameters to simulate wealth accumulation and find optimal asset allocations."
