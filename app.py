@@ -23,9 +23,9 @@ RHO_DEFAULT        = 0.20   # Equity / bond correlation
 # ----- Investor profile ------
 # -----------------------------
 GAMMA_DEFAULT = 4.0            # CRRA utility coefficient
-SALARY_0_DEFAULT = 100_000     # Starting wage at simulation year 0
-SALARY_GROWTH_DEFAULT = 0.015  # 1.5 % real growth
-CONTRIB_RATE_DEFAULT = 0.12    # 12 % salary deferral
+SALARY_0_DEFAULT = 200_000     # Starting wage at simulation year 0
+SALARY_GROWTH_DEFAULT = 0.03  # 3 % real growth
+CONTRIB_RATE_DEFAULT = 0.20    # 20 % salary deferral
 RETIRE_AGE_DEFAULT = 65
 CURRENT_AGE_DEFAULT = 45       # So "years to retire" = 20 by default
 
@@ -207,7 +207,7 @@ def run_simulation(mu_equity: float, mu_bond: float, sig_equity: float, sig_bond
         bond_return = r[1]
 
         # Clip the returns to a reasonable range
-        equity_return = np.clip(equity_return, -0.5, 0.5)
+        equity_return = np.clip(equity_return, -0.4, 0.4)
         bond_return = np.clip(bond_return, -0.2, 0.2)
 
         return_list.append(equity_return)
@@ -250,10 +250,10 @@ iface = gr.Interface(
         gr.Slider(minimum=0.01, maximum=0.10, value=MU_BOND_DEFAULT, label="Bond Expected Return (annualised nominal)", info="The anticipated average annual return for bonds."),
         gr.Slider(minimum=0.05, maximum=0.30, value=SIG_EQUITY_DEFAULT, label="Equity Volatility (st-dev)", info="The standard deviation of annual equity returns, representing risk."),
         gr.Slider(minimum=0.01, maximum=0.15, value=SIG_BOND_DEFAULT, label="Bond Volatility (st-dev)", info="The standard deviation of annual bond returns, representing risk."),
-        gr.Slider(minimum=-0.5, maximum=0.5, value=RHO_DEFAULT, label="Equity / Bond Correlation", info="The correlation coefficient between equity and bond returns. A higher value means they move more in sync."),
+        gr.Slider(minimum=-0.5, maximum=0.5, value=RHO_DEFAULT, label="Equity / Bond Correlation", info="The correlation coefficient between equity and bond returns. A higher value means they move more in sync. Note: Individual simulated annual returns are clipped to a reasonable range (e.g., -50% to +50% for equity, -20% to +20% for bonds) to prevent unrealistic extreme values, while still reflecting volatility."),
         gr.Slider(minimum=1.0, maximum=10.0, value=GAMMA_DEFAULT, label="CRRA Utility Coefficient (Gamma)", info="Coefficient of Relative Risk Aversion. Higher values indicate greater risk aversion, leading to more conservative allocations."),
         gr.Number(value=SALARY_0_DEFAULT, label="Starting Annual Salary", info="The initial annual salary at the start of the simulation."),
-        gr.Slider(minimum=0.00, maximum=0.05, value=SALARY_GROWTH_DEFAULT, label="Annual Salary Growth Rate", info="The annual rate at which the salary is expected to grow."),
+        gr.Slider(minimum=0.00, maximum=0.05, value=0.03, label="Annual Salary Growth Rate", info="The annual rate at which the salary is expected to grow."),
         gr.Slider(minimum=0.01, maximum=0.30, value=CONTRIB_RATE_DEFAULT, label="Annual Contribution Rate (% of salary)", info="The percentage of salary contributed to the investment portfolio each year."),
         gr.Slider(minimum=50, maximum=75, value=RETIRE_AGE_DEFAULT, step=1, label="Retirement Age", info="The age at which the investor plans to retire."),
         gr.Slider(minimum=20, maximum=60, value=CURRENT_AGE_DEFAULT, step=1, label="Current Age", info="The investor's current age. Used to calculate years to retirement."),
@@ -351,7 +351,7 @@ with gr.Blocks(css="""
             gr.Slider(minimum=20, maximum=60, value=CURRENT_AGE_DEFAULT, step=1, label="Current Age", info="The investor's current age. Used to calculate years to retirement."),
             gr.Slider(minimum=1000, maximum=20000, value=N_PATHS_DEFAULT, step=1000, label="Number of Monte-Carlo Paths", info="The number of simulation runs to perform for statistical accuracy."),
             gr.Number(value=SEED_DEFAULT, label="Random Seed", info="A seed for the random number generator to ensure reproducible results."),
-            gr.Number(value=0, label="Current Investment Asset Value", info="The current value of the investor's assets.")
+            gr.Number(value=2000000, label="Current Investment Asset Value", info="The current value of the investor's assets.")
         ],
         outputs=[
             gr.Textbox(label="Optimal Equity Weight for Current Years to Retirement"),
