@@ -288,11 +288,10 @@ This application provides an **open-box** re-implementation of the core ideas be
     The CRRA utility function is defined as:
 
     $$
-    U(W) = \frac{W^{1-\gamma}}{1-\gamma} \quad \text{if } \gamma \neq 1
-    $$
-
-    $$
-    U(W) = \log(W) \quad \text{if } \gamma = 1
+    \begin{aligned}
+    U(W) &= \frac{W^{1-\gamma}}{1-\gamma} \quad &\text{if } \gamma \neq 1 \\
+    U(W) &= \log(W) \quad &\text{if } \gamma = 1
+    \end{aligned}
     $$
 
     where:
