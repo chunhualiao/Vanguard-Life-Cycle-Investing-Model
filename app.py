@@ -323,6 +323,34 @@ More specifically, the algorithm considers each years-to-retirement : counting d
    * compute the average terminal wealth balance's utility values of all paths
 * find equity weight leading to max average utility values for this year, based on 8000 simulation for each weight
 
+The psedocode above is expanded to the code below:
+```
+// Outer loop: Iterate through years to retirement, from max_years_to_retirement down to 0
+for Y in [max_years_to_retirement, max_years_to_retirement - 1, …, 0]:
+    // Initialize best utility found for this Y
+    best_expected_utility_for_Y = -infinity
+    optimal_equity_weight_for_Y = None
+
+    // Inner loop: Iterate through a predefined grid of candidate equity weights (w)
+    // (e.g., 0.30, 0.35, ..., 0.95 as implemented by default)
+    for w in [candidate_equity_weights_grid]:
+        // Simulate N wealth paths for this fixed w over Y years
+        // (N is typically 8000 as per N_PATHS_DEFAULT)
+        terminal_wealth_paths = simulate_wealth_paths(w, Y, ...)
+
+        // Compute expected utility EY[w]
+        // This is the average of the utility values based on the terminal wealth of each simulated path
+        expected_utility_for_w = expected_utility_terminal_wealth(terminal_wealth_paths, gamma)
+
+        // Choose w* that maximizes EY[w] for this Y
+        if expected_utility_for_w > best_expected_utility_for_Y:
+            best_expected_utility_for_Y = expected_utility_for_w
+            optimal_equity_weight_for_Y = w
+
+    // Store the optimal equity weight (w*) for this Y
+    store optimal_equity_weight_for_Y as OPT[Y]
+```
+
 5.  **Derives Glide Path:** The result is a "glide path" DataFrame, showing the optimal equity allocation as years to retirement decrease. This can be compared with typical glide paths suggested by models like Vanguard's.
 
 **Key Assumptions and Internal Algorithms:**
