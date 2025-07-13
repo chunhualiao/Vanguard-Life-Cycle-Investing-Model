@@ -159,41 +159,55 @@ def run_simulation(mu_equity: float, mu_bond: float, sig_equity: float, sig_bond
     ax.grid(True, linestyle='--')  # Add grid lines for better readability
     plt.tight_layout()
 
-    # Simulate multiple wealth paths using the optimal equity weight
-    n_example_paths = 10  # Number of example paths to plot
-    W_paths = []
+    # Simulate wealth paths using the derived glide path (dynamic weights)
+    n_paths = n_paths  # Use the user-specified number of paths
+    years = years_to_retirement
+    wealth_matrix = np.zeros((n_paths, years + 1))
+    equity_weights = gp.sort_index(ascending=False)['equity_weight'].values  # years_to_retire from high to low
+
+    # Initial wealth for all paths
+    wealth_matrix[:, 0] = current_wealth
     rng = np.random.default_rng(seed)
     COV = np.array([
         [sig_equity**2, rho*sig_equity*sig_bond],
         [rho*sig_equity*sig_bond, sig_bond**2]
     ])
     means = np.array([mu_equity, mu_bond])
-    
-    for i in range(n_example_paths):
-        W_path = simulate_wealth_paths(w_star, years_to_retirement, mu_equity, mu_bond, sig_equity, sig_bond, rho,
-                                      n_paths, seed + i, salary_0, salary_growth, contrib_rate, current_wealth)
-        W_paths.append(W_path)
 
-    # Create a plot of the example wealth paths
+    salary = salary_0
+    for yr in range(years):
+        # Simulate returns for this year
+        returns = rng.multivariate_normal(means, COV, size=n_paths)
+        equity_r = np.clip(returns[:, 0], -0.4, 0.4)
+        bond_r = np.clip(returns[:, 1], -0.2, 0.2)
+        w_e = equity_weights[yr]
+        # Salary and contribution for this year
+        contrib = contrib_rate * salary
+        # Update wealth for all paths
+        wealth_matrix[:, yr] += contrib
+        wealth_matrix[:, yr + 1] = wealth_matrix[:, yr] * (1 + w_e * equity_r + (1 - w_e) * bond_r)
+        salary *= (1 + salary_growth)
+
+    # Compute percentiles
+    median_wealth = np.median(wealth_matrix[:, 1:], axis=0)
+    p10_wealth = np.percentile(wealth_matrix[:, 1:], 10, axis=0)
+    p90_wealth = np.percentile(wealth_matrix[:, 1:], 90, axis=0)
+    mean_wealth = np.mean(wealth_matrix[:, 1:], axis=0)
+
+    # Plot percentiles
     fig_paths, ax_paths = plt.subplots(figsize=(10, 6))
-    
-    utilities = []
-    for W_path in W_paths:
-        utility = expected_utility_terminal_wealth(W_path, gamma)
-        utilities.append(utility)
-
-    max_utility_index = np.argmax(utilities)
-    
-    for i, W_path in enumerate(W_paths):
-        if i == max_utility_index:
-            ax_paths.plot(W_path, color='red', linewidth=2, label='Optimal Path')
-        else:
-            ax_paths.plot(W_path, alpha=0.3)
-    ax_paths.set_xlabel("Monte Carlo Paths")
-    ax_paths.set_ylabel("Wealth")
+    x = np.arange(1, years + 1)
+    ax_paths.plot(x, median_wealth, label="Median Wealth", color="blue", linewidth=2)
+    ax_paths.plot(x, p10_wealth, label="10th Percentile", color="orange", linestyle="--")
+    ax_paths.plot(x, p90_wealth, label="90th Percentile", color="green", linestyle="--")
+    ax_paths.plot(x, mean_wealth, label="Mean Wealth", color="red", linestyle=":")
+    import matplotlib.ticker as mticker
+    ax_paths.set_xlabel("Year")
+    ax_paths.set_ylabel("Wealth ($)")
+    ax_paths.set_title("Simulated Wealth Distribution Using Glide Path (Median, 10th, 90th Percentile, Mean)")
     ax_paths.legend()
-    ax_paths.set_title("Example Monte Carlo Simulation Paths")
     ax_paths.grid(True, linestyle='--')
+    ax_paths.yaxis.set_major_formatter(mticker.StrMethodFormatter('${x:,.0f}'))
     plt.tight_layout()
 
     # Simulate a wealth path using the optimal equity weight
@@ -227,7 +241,7 @@ def run_simulation(mu_equity: float, mu_bond: float, sig_equity: float, sig_bond
             'Wealth': "${:,.2f}".format(W),
             'Equity Return': "{:.2%}".format(equity_return),
             'Bond Return': "{:.2%}".format(bond_return),
-            'Equity Weight': current_equity_weight
+            'Equity Weight': "{:.2f}".format(current_equity_weight)
         })
     example_path_df = pd.DataFrame(data)
 
@@ -239,7 +253,7 @@ def run_simulation(mu_equity: float, mu_bond: float, sig_equity: float, sig_bond
     ax_returns.set_title("Distribution of Equity Returns")
     plt.tight_layout()
     
-    return optimal_weight_text, fig, example_path_df, "The following plot shows a few example Monte Carlo simulation paths. The red line highlights the path with the highest equity utility.", fig_paths, fig_returns
+    return optimal_weight_text, fig, example_path_df, "The following plot shows the median, 10th, and 90th percentile of simulated terminal wealth at each year, using the glide path.", fig_paths, fig_returns
 
 # Add a detailed introduction using gr.Markdown
 introduction_markdown = """
@@ -376,7 +390,7 @@ with gr.Blocks(css="""
             gr.Textbox(label="Optimal Equity Weight for Current Years to Retirement"),
             gr.Plot(label="Derived Glide Path Plot"),
             gr.DataFrame(label="Example Wealth Path,using Optimal Equity Weights Derived from Glide Path"),
-            gr.Markdown("The following plot shows a few example Monte Carlo simulation paths. The red line highlights the path with the highest expected utility."),
+            gr.Markdown("The following plot shows the median, 10th, and 90th percentile of simulated terminal wealth at each year, using the glide path."),
             gr.Plot(label="Example Monte Carlo Simulation Paths")
         ],
         title="Vanguard Life-Cycle Investing Model (Didactic Re-implementation)",
