@@ -253,7 +253,14 @@ def run_simulation(mu_equity: float, mu_bond: float, sig_equity: float, sig_bond
     ax_returns.set_title("Distribution of Equity Returns")
     plt.tight_layout()
     
-    return optimal_weight_text, fig, example_path_df, "The following plot shows the median, 10th, and 90th percentile of simulated terminal wealth at each year, using the glide path.", fig_paths, fig_returns
+    return (
+        optimal_weight_text,
+        fig,
+        "The following plot shows an example wealth path using optimal Equity Weights derived from the Glide Path",
+        example_path_df,
+        "The following plot shows the median, 10th, and 90th percentile of simulated terminal wealth at each year, using the glide path.",
+        fig_paths
+    )
 
 # Add a detailed introduction using gr.Markdown
 introduction_markdown = """
@@ -389,9 +396,10 @@ with gr.Blocks(css="""
         outputs=[
             gr.Textbox(label="Optimal Equity Weight for Current Years to Retirement"),
             gr.Plot(label="Derived Glide Path Plot"),
-            gr.DataFrame(label="Example Wealth Path,using Optimal Equity Weights Derived from Glide Path"),
+            gr.Markdown("The following plot shows an example wealth path using optimal Equity Weights derived from the Glide Path"),
+            gr.DataFrame(label="Example Wealth Path"),
             gr.Markdown("The following plot shows the median, 10th, and 90th percentile of simulated terminal wealth at each year, using the glide path."),
-            gr.Plot(label="Example Monte Carlo Simulation Paths")
+            gr.Plot(label="Monte Carlo Simulation Percentiles of Wealth Paths"),
         ],
         title="Vanguard Life-Cycle Investing Model (Didactic Re-implementation)",
         description="Adjust the parameters to simulate wealth accumulation and find optimal asset allocations."
