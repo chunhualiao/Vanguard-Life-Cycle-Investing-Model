@@ -287,9 +287,13 @@ This application provides an **open-box** re-implementation of the core ideas be
 
     The CRRA utility function is defined as:
 
-    U(W) = (W^(1-gamma))/(1-gamma)  if gamma != 1
-    
-    U(W) = log(W)                   if gamma == 1
+    $$
+    U(W) = \frac{W^{1-\gamma}}{1-\gamma} \quad \text{if } \gamma \neq 1
+    $$
+
+    $$
+    U(W) = \log(W) \quad \text{if } \gamma = 1
+    $$
 
     where:
         W = terminal wealth
@@ -301,7 +305,7 @@ This application provides an **open-box** re-implementation of the core ideas be
         
         The utility would be calculated as:
         
-        U(100000) = (100000^(1-2))/(1-2) = (100000^(-1))/(-1) = 1/100000 = 0.00001
+        U(100000) = (100000^(1-2))/(1-2) = (100000^(-1))/(-1) = -1/100000 = -0.00001
 4.  **Searches for Optimal Allocation:** It exhaustively searches over a range of candidate equity weights to find the allocation that maximizes the expected utility for each "years-to-retirement" point.
 5.  **Derives Glide Path:** The result is a "glide path" DataFrame, showing the optimal equity allocation as years to retirement decrease. This can be compared with typical glide paths suggested by models like Vanguard's.
 
