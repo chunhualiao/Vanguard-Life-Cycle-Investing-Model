@@ -285,17 +285,9 @@ This application provides an **open-box** re-implementation of the core ideas be
 2.  **Simulates Wealth Paths:** For a given constant equity weight, it simulates many possible wealth accumulation paths, considering voluntary contributions, salary growth, and time to retirement.
 3.  **Computes Expected Utility:** Calculates the expected Constant Relative Risk Aversion (CRRA) utility of terminal wealth for each simulated path. This utility function quantifies investor satisfaction with wealth, accounting for risk aversion.
 
-The CRRA utility function is defined as:
+The CRRA utility function is defined as: $U(W) = \frac{W^{1-\gamma}}{1-\gamma}$ when gamma is not equal to 1.
 
-$$
-U(W) = \frac{W^{1-\gamma}}{1-\gamma}
-$$
-And for the special case when gamma equals 1:
-$$
-U(W) = \log(W) 
-$$
-
-And for the special case when gamma equals 1:
+And for the special case when gamma equals 1: $U(W) = \log(W)$
 
 where:
     W = terminal wealth
