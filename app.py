@@ -12,7 +12,7 @@ from typing import Tuple
 # -----------------------------
 # ---- Capital‑market inputs ---
 # -----------------------------
-# Annualised nominal return expectations
+# Annualized nominal return expectations
 MU_EQUITY_DEFAULT = 0.080   # 8.0 % (Further adjusted for higher equity allocation)
 MU_BOND_DEFAULT   = 0.040   # 4.0 % (Further adjusted for higher equity allocation)
 SIG_EQUITY_DEFAULT = 0.15   # 15 % st‑dev
@@ -24,7 +24,7 @@ RHO_DEFAULT        = 0.20   # Equity / bond correlation
 # -----------------------------
 GAMMA_DEFAULT = 4.0            # CRRA utility coefficient
 SALARY_0_DEFAULT = 200_000     # Starting wage at simulation year 0
-SALARY_GROWTH_DEFAULT = 0.03  # 3 % real growth
+SALARY_GROWTH_DEFAULT = 0.03  # 3 % nominal growth
 CONTRIB_RATE_DEFAULT = 0.20    # 20 % salary deferral
 RETIRE_AGE_DEFAULT = 65
 CURRENT_AGE_DEFAULT = 45       # So "years to retire" = 20 by default
@@ -355,12 +355,12 @@ for Y in [max_years_to_retirement, max_years_to_retirement - 1, …, 0]:
 *   **Ignored Factors:** It ignores several real-world complexities such as:
     *   Taxes
     *   Annuitisation options (converting accumulated wealth into a stream of income)
-    *   Inflation shocks (only nominal returns are considered, though salary growth is real)
+    *   Inflation shocks (only nominal returns are considered, salary growth is nominal too)
     *   Behavioral biases
     *   Liquidity constraints
 *   **Placeholder Assumptions:** The default capital-market assumptions are placeholders and should be replaced with your own research-backed expectations for more realistic results.
 *   **No Failure Rate Calculation:** While the original model might compute a 'failure rate', this re-implementation focuses on utility maximization.
-*   **No Inflation Adjustment:** All returns and salaries are in nominal terms, without explicit inflation adjustment for the final wealth, though salary growth is real.
+*   **No Inflation Adjustment:** All returns and salaries are in nominal terms, without explicit inflation adjustment for the final wealth, salary growth is nominal too.
 
 This model serves as a didactic tool to understand the principles of life-cycle investing and optimal asset allocation under uncertainty.
 """
@@ -375,8 +375,8 @@ with gr.Blocks(css="""
     iface = gr.Interface(
         fn=run_simulation,
         inputs=[
-            gr.Slider(minimum=0.01, maximum=0.20, value=MU_EQUITY_DEFAULT, label="Equity Expected Return (annualised nominal)", info="The anticipated average annual return for equities."),
-            gr.Slider(minimum=0.01, maximum=0.10, value=MU_BOND_DEFAULT, label="Bond Expected Return (annualised nominal)", info="The anticipated average annual return for bonds."),
+            gr.Slider(minimum=0.01, maximum=0.20, value=MU_EQUITY_DEFAULT, label="Equity Expected Return (annualized nominal)", info="The anticipated average annual return for equities."),
+            gr.Slider(minimum=0.01, maximum=0.10, value=MU_BOND_DEFAULT, label="Bond Expected Return (annualized nominal)", info="The anticipated average annual return for bonds."),
             gr.Slider(minimum=0.05, maximum=0.30, value=SIG_EQUITY_DEFAULT, label="Equity Volatility (st-dev)", info="The standard deviation of annual equity returns, representing risk."),
             gr.Slider(minimum=0.01, maximum=0.15, value=SIG_BOND_DEFAULT, label="Bond Volatility (st-dev)", info="The standard deviation of annual bond returns, representing risk."),
             gr.Slider(minimum=-0.5, maximum=0.5, value=RHO_DEFAULT, label="Equity / Bond Correlation", info="The correlation coefficient between equity and bond returns. A higher value means they move more in sync."),
