@@ -285,26 +285,26 @@ This application provides an **open-box** re-implementation of the core ideas be
 2.  **Simulates Wealth Paths:** For a given constant equity weight, it simulates many possible wealth accumulation paths, considering voluntary contributions, salary growth, and time to retirement.
 3.  **Computes Expected Utility:** Calculates the expected Constant Relative Risk Aversion (CRRA) utility of terminal wealth for each simulated path. This utility function quantifies investor satisfaction with wealth, accounting for risk aversion.
 
-    The CRRA utility function is defined as:
+The CRRA utility function is defined as:
 
-    $$
+$$
     \begin{aligned}
     U(W) &= \frac{W^{1-\gamma}}{1-\gamma} \quad &\text{if } \gamma \neq 1 \\
     U(W) &= \log(W) \quad &\text{if } \gamma = 1
     \end{aligned}
-    $$
+$$
 
-    where:
-        W = terminal wealth
+where:
+    W = terminal wealth
         
-        gamma = coefficient of relative risk aversion
+    gamma = coefficient of relative risk aversion
 
-    Example:
-        Let's say an investor has a terminal wealth of $100,000 and a risk aversion coefficient (gamma) of 2.
+Example:
+    Let's say an investor has a terminal wealth of $100,000 and a risk aversion coefficient (gamma) of 2.
         
-        The utility would be calculated as:
+    The utility would be calculated as:
         
-        U(100000) = (100000^(1-2))/(1-2) = (100000^(-1))/(-1) = -1/100000 = -0.00001
+    U(100000) = (100000^(1-2))/(1-2) = (100000^(-1))/(-1) = -1/100000 = -0.00001
 4.  **Searches for Optimal Allocation:** It exhaustively searches over a range of candidate equity weights to find the allocation that maximizes the expected utility for each "years-to-retirement" point.
 5.  **Derives Glide Path:** The result is a "glide path" DataFrame, showing the optimal equity allocation as years to retirement decrease. This can be compared with typical glide paths suggested by models like Vanguard's.
 
