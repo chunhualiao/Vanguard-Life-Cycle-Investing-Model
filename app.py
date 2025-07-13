@@ -286,7 +286,6 @@ This application provides an **open-box** re-implementation of the core ideas be
 3.  **Computes Expected Utility:** Calculates the expected Constant Relative Risk Aversion (CRRA) utility of terminal wealth for each simulated path. This utility function quantifies investor satisfaction with wealth, accounting for risk aversion.
 
 The CRRA utility function is defined as:
-
 $$
 U(W) = \frac{W^{1-\gamma}}{1-\gamma}
 $$
