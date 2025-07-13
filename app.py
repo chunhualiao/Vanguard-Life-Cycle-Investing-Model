@@ -222,7 +222,7 @@ def run_simulation(mu_equity: float, mu_bond: float, sig_equity: float, sig_bond
             'Equity Return': "{:.2%}".format(equity_return),
             'Bond Return': "{:.2%}".format(bond_return),
             'Equity Weight': w_star,
-            'Expected Utility': utility
+            'Expected Utility': "{:.4e}".format(utility)
         })
     example_path_df = pd.DataFrame(data)
 
@@ -240,7 +240,7 @@ def run_simulation(mu_equity: float, mu_bond: float, sig_equity: float, sig_bond
     ax_returns.set_title("Distribution of Equity Returns")
     plt.tight_layout()
     
-    return optimal_weight_text, gp, fig, example_path_df, "The following plot shows a few example Monte Carlo simulation paths. The red line highlights the path with the highest expected utility.", fig_paths, fig_returns
+    return optimal_weight_text, fig, example_path_df, "The following plot shows a few example Monte Carlo simulation paths. The red line highlights the path with the highest equity utility.", fig_paths, fig_returns
 
 # Gradio Interface
 iface = gr.Interface(
@@ -262,7 +262,6 @@ iface = gr.Interface(
     ],
         outputs=[
             gr.Textbox(label="Optimal Equity Weight for Current Years to Retirement"),
-            gr.DataFrame(label="Derived Glide Path"),
             gr.Plot(label="Derived Glide Path Plot"),
             gr.DataFrame(label="Example Wealth Path"),
             gr.Markdown("The following plot shows a few example Monte Carlo simulation paths. The red line highlights the path with the highest expected utility."),
@@ -301,6 +300,29 @@ Example:
         
     U(100000) = (100000^(1-2))/(1-2) = (100000^(-1))/(-1) = -1/100000 = -0.00001
 4.  **Searches for Optimal Allocation:** It exhaustively searches over a range of candidate equity weights to find the allocation that maximizes the expected utility for each "years-to-retirement" point.
+
+This is the key step that derives the optimal equity weight for the current years to retirement, which is then used to build a glide path.
+
+The search is structured as follows:
+* Inside every inner loop the equity mix stays fixed at w for the entire remaining Y-year horizon.
+* Because you repeat that inner loop for every w, the algorithm ends up with one “best” weight w* for that specific starting point.
+
+```
+for Y in [40, 39, …, 0]:               # years-to-retirement
+    for w in [0%,10%,…,100%]:          # candidate equity weights
+        simulate N wealth paths  # 8000 simulation for example
+        compute expected utility EY[w]  # average of 8000 utility values based on terminal wealth of each simulated wealth path
+    choose w* that maximises EY[w] # this is the optimal equity weight for this Y
+    store w* as OPT[Y]
+```
+
+More specifically, the algorithm considers each years-to-retirement : counting down years from 40 to 0
+* consider different choices of equity weights for the current year, e.g. 10%, 20%, ..., 100%
+   * simulate wealth path from this year to the retirement year : e.g. 8000 times
+   * in this simplified model the CRRA utility is applied only to the ending (terminal) wealth balance that exists at the moment of retirement, not to the intermediate yearly balances.
+   * compute the average terminal wealth balance's utility values of all paths
+* find equity weight leading to max average utility values for this year, based on 8000 simulation for each weight
+
 5.  **Derives Glide Path:** The result is a "glide path" DataFrame, showing the optimal equity allocation as years to retirement decrease. This can be compared with typical glide paths suggested by models like Vanguard's.
 
 **Key Assumptions and Internal Algorithms:**
@@ -353,7 +375,6 @@ with gr.Blocks(css="""
         ],
         outputs=[
             gr.Textbox(label="Optimal Equity Weight for Current Years to Retirement"),
-            gr.DataFrame(label="Derived Glide Path"),
             gr.Plot(label="Derived Glide Path Plot"),
             gr.DataFrame(label="Example Wealth Path"),
             gr.Markdown("The following plot shows a few example Monte Carlo simulation paths. The red line highlights the path with the highest expected utility."),
